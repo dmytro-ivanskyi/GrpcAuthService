@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcAuthService";
+
+// The service definition.
+service Register {
+  rpc RegisterUser (UserRequest) returns (UserReply);
+}
+
+
+message UserRequest {
+  string name = 1;
+  string email = 2;
+}
+
+
+message UserReply {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+}
