@@ -1,2 +1,3 @@
 obj\Debug\netcoreapp3.1/User.cs \
-obj\Debug\netcoreapp3.1/UserGrpc.cs: Protos/user.proto
+obj\Debug\netcoreapp3.1/UserGrpc.cs: C:/Users/ivans/.nuget/packages/grpc.tools/2.27.0/build/native/include/google/protobuf/empty.proto\
+ Protos/user.proto

@@ -1,0 +1,3 @@
+obj\Debug\netcoreapp3.1/Register.cs \
+obj\Debug\netcoreapp3.1/RegisterGrpc.cs: C:/Users/ivans/.nuget/packages/grpc.tools/2.27.0/build/native/include/google/protobuf/empty.proto\
+ Protos/register.proto

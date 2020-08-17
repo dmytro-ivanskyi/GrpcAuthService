@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "GrpcAuthService";
+
+// The service definition.
+service Register {
+  rpc RegisterUser (UserRequest) returns (UserReply);
+
+  rpc UpdateUser (UserRequest) returns (UserReply);
+
+  rpc DeleteUser (UserIdRequest) returns (UserReply);
+
+  rpc GetUserById (UserIdRequest) returns (google.protobuf.Empty);
+
+  rpc GetAllUsers (google.protobuf.Empty) returns (AllUsersReply);
+}
+
+
+message UserRequest {
+  string name = 1;
+  string email = 2;
+}
+
+message UserIdRequest {
+	int32 id = 1;
+}
+
+message UserReply {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message AllUsersReply {
+	repeated UserReply users = 1;
+}

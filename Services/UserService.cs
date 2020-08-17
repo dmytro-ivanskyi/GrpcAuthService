@@ -1,14 +1,16 @@
 ﻿using Data.Models;
 using Data.RepoInterfaces;
+using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using System.Threading.Tasks;
 
 namespace GrpcAuthService.Services
 {
-    public class RegisterService: Register.RegisterBase
+    public class UserService : Register.RegisterBase
     {
         private readonly IUserRepo _repo;
-        public RegisterService(IUserRepo repo)
+        public UserService(IUserRepo repo)
         {
             _repo = repo;
         }
@@ -20,6 +22,7 @@ namespace GrpcAuthService.Services
                 Name = request.Name,
                 Email = request.Email
             };
+
             var created = await _repo.CreateUserAsync(user);
             if (!created)
                 return null;
@@ -28,12 +31,23 @@ namespace GrpcAuthService.Services
             return new UserReply { Id = reply.Id, Name = reply.Name, Email = reply.Email };
         }
 
-        //        public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
-        //        {
-        //            return Task.FromResult(new HelloReply
-        //            {
-        //                Message = "Hello " + request.Name
-        //            });
-        //        }
+        public override async Task<AllUsersReply> GetAllUsers(Empty request, ServerCallContext context)
+        {
+            var users = await _repo.GetUsersAsync();
+
+            var reply = new AllUsersReply();
+            foreach (var u in users)
+            {
+
+                reply.Users.Add(new UserReply
+                {
+                    Id = u.Id,
+                    Name = u.Name,
+                    Email = u.Email
+                });
+            }
+            
+            return reply;
+        }
     }
 }

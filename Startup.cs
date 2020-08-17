@@ -51,7 +51,7 @@ namespace GrpcAuthService
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<RegisterService>();
+                endpoints.MapGrpcService<Services.UserService>();
 
                 endpoints.MapGet("/", async context =>
                 {
